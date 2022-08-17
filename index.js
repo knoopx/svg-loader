@@ -1,6 +1,6 @@
 const path = require("path")
 
-const svg2js = require("svgo/lib/svgo/svg2js")
+const { parseSvg } = require('svgo/lib/parser');
 const { parseQuery, getOptions, interpolateName } = require("loader-utils")
 
 const getOutputAndPublicPath = (
@@ -49,7 +49,7 @@ module.exports = function (content) {
 
   const outputContext = options.context || this.rootContext
 
-  const ast = svg2js(content)
+  const ast = parseSvg(content)
 
   if (ast.error) {
     throw new Error(ast.error)
